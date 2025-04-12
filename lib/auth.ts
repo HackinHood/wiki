@@ -7,4 +7,8 @@ const db = client.db("auth");
 
 export const auth = betterAuth({
     database: mongodbAdapter(db),
+    emailAndPassword: {
+        enabled: true,
+        minPasswordLength: 10,
+    }
 })
