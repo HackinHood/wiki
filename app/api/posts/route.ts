@@ -15,7 +15,7 @@ export const GET = async (req: Request) => {
 }
 
 export const POST = async (req: Request) => {
-    const session = auth.api.getSession(req)
+    const session = await auth.api.getSession(req)
     if (!session) {
         return new Response("Unauthorized", { status: 401 });
     }
@@ -24,10 +24,10 @@ export const POST = async (req: Request) => {
     const db = client.db("main-data");
     const body = await req.json();
 
-    const { title, content } = body;
+    const { title, content, description, tldr } = body;
 
-    if (!title || !content) {
-        return new Response(JSON.stringify({ error: "Title and content are required" }), {
+    if (!title || !content || !description || !tldr) {
+        return new Response(JSON.stringify({ error: "Title, content, description, and tldr are required" }), {
             status: 400,
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const POST = async (req: Request) => {
         });
     }
 
-    const post = await db.collection("posts").insertOne({ title, content });
+    const post = await db.collection("posts").insertOne({ title, content, description, tldr, author: session.user.id });
 
     return new Response(JSON.stringify(post), {
         status: 201,
