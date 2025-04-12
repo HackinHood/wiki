@@ -105,7 +105,7 @@ export default function RegisterPage() {
                             {/* {loading ? "Creating account..." : "Create Account"} */}
                         </Button>
                         <div className="text-center text-sm">
-                            Don&apos; have an account?{" "}
+                            Don&apos;t have an account?{" "}
                             <Link
                                 href="/auth/register"
                                 className="text-blue-600 hover:underline"
