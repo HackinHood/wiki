@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 
 import { HeroUIProvider } from "@heroui/system";
+import { TanstackQueryProvider } from "./providers/query-provider";
 
 export interface ProvidersProps {
     children: React.ReactNode;
@@ -24,8 +25,10 @@ export const Providers = ({ children, themeProps }: ProvidersProps) => {
     const router = useRouter();
 
     return (
-        <HeroUIProvider navigate={router.push}>
-            <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
-        </HeroUIProvider>
+        <TanstackQueryProvider>
+            <HeroUIProvider navigate={router.push}>
+                <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+            </HeroUIProvider>
+        </TanstackQueryProvider>
     );
 };
