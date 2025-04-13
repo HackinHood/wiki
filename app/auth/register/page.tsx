@@ -16,6 +16,7 @@ import { addToast } from "@heroui/toast";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { DiscordAuthButton } from "@/components/discord-auth-button";
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -37,6 +38,7 @@ export default function RegisterPage() {
         if (password !== confirmPassword) {
             addToast({
                 title: "Passwords do not match",
+                description: "Please make sure your passwords match",
                 variant: "flat",
                 color: "danger",
             });
@@ -136,6 +138,17 @@ export default function RegisterPage() {
                                 placeholder="••••••••••"
                             />
                         </div>
+                        <div className="relative my-6">
+                            <div className="absolute inset-0 flex items-center">
+                                <span className="w-full border-t"></span>
+                            </div>
+                            <div className="relative flex justify-center text-xs uppercase">
+                                <span className="bg-background px-2 text-muted-foreground">
+                                    Or continue with
+                                </span>
+                            </div>
+                        </div>
+                        <DiscordAuthButton />
                     </CardContent>
                     <CardFooter className="flex flex-col space-y-4 w-full">
                         <Button

@@ -16,8 +16,9 @@ import { addToast } from "@heroui/toast";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { DiscordAuthButton } from "@/components/discord-auth-button";
 
-export default function RegisterPage() {
+export default function LoginPage() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -98,11 +99,21 @@ export default function RegisterPage() {
                                 description="Password must be at least 10 characters long"
                             />
                         </div>
+                        <div className="relative my-6">
+                            <div className="absolute inset-0 flex items-center">
+                                <span className="w-full border-t"></span>
+                            </div>
+                            <div className="relative flex justify-center text-xs uppercase">
+                                <span className="bg-background px-2 text-muted-foreground">
+                                    Or continue with
+                                </span>
+                            </div>
+                        </div>
+                        <DiscordAuthButton />
                     </CardContent>
                     <CardFooter className="flex flex-col space-y-4 w-full">
                         <Button type="submit" className="w-full">
                             Login
-                            {/* {loading ? "Creating account..." : "Create Account"} */}
                         </Button>
                         <div className="text-center text-sm">
                             Don&apos;t have an account?{" "}

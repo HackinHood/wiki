@@ -1,5 +1,9 @@
+"use client";
+
 import clsx from "clsx";
 import NextLink from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import {
     TwitterIcon,
@@ -25,8 +29,41 @@ import {
     NavbarMenuItem,
 } from "@heroui/navbar";
 import { link as linkStyles } from "@heroui/theme";
+import { authClient } from "@/lib/auth-client";
+import { addToast } from "@heroui/toast";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 export const Navbar = () => {
+    const router = useRouter();
+    const [mounted, setMounted] = useState(false);
+    const { data: session, isPending } = authClient.useSession();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const handleLogout = async () => {
+        try {
+            await authClient.signOut();
+            addToast({
+                title: "Logged out",
+                description: "You have been successfully logged out",
+                variant: "flat",
+                color: "default"
+            });
+            router.push("/");
+            router.refresh();
+        } catch (error) {
+            console.error("Logout error:", error);
+            addToast({
+                title: "Error",
+                description: "Failed to log out. Please try again.",
+                variant: "flat",
+                color: "danger"
+            });
+        }
+    };
+
     const searchInput = (
         <Input
             aria-label="Search"
@@ -109,6 +146,64 @@ export const Navbar = () => {
                 <NavbarItem className="hidden lg:flex">
                     {searchInput}
                 </NavbarItem>
+                
+                {mounted && !isPending && (
+                    <>
+                        {session ? (
+                            <>
+                                <NavbarItem>
+                                    <div className="flex items-center gap-2">
+                                        <Avatar className="h-8 w-8">
+                                            <AvatarImage
+                                                src={session.user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${session.user.name || session.user.email}`} 
+                                                alt={session.user.name || "User"}
+                                            />
+                                            <AvatarFallback>
+                                                {(session.user.name?.[0] || session.user.email?.[0] || "U").toUpperCase()}
+                                            </AvatarFallback>
+                                        </Avatar>
+                                        <span className="text-sm hidden md:block">
+                                            {session.user.name || session.user.email}
+                                        </span>
+                                    </div>
+                                </NavbarItem>
+                                <NavbarItem>
+                                    <Button
+                                        onClick={handleLogout}
+                                        className="text-sm font-normal"
+                                        variant="flat"
+                                        color="danger"
+                                    >
+                                        Log Out
+                                    </Button>
+                                </NavbarItem>
+                            </>
+                        ) : (
+                            <>
+                                <NavbarItem>
+                                    <Button
+                                        as={Link}
+                                        href="/auth/login"
+                                        className="text-sm font-normal"
+                                        variant="flat"
+                                    >
+                                        Login
+                                    </Button>
+                                </NavbarItem>
+                                <NavbarItem>
+                                    <Button
+                                        as={Link}
+                                        href="/auth/register"
+                                        className="text-sm font-normal"
+                                    >
+                                        Sign Up
+                                    </Button>
+                                </NavbarItem>
+                            </>
+                        )}
+                    </>
+                )}
+                
                 <NavbarItem className="hidden md:flex">
                     <Button
                         isExternal
@@ -140,6 +235,26 @@ export const Navbar = () => {
             <NavbarMenu>
                 {searchInput}
                 <div className="mx-4 mt-2 flex flex-col gap-2">
+                    {mounted && !isPending && session && (
+                        <div className="flex items-center gap-2 py-2 mb-4 border-b">
+                            <Avatar className="h-10 w-10">
+                                <AvatarImage
+                                    src={session.user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${session.user.name || session.user.email}`} 
+                                    alt={session.user.name || "User"}
+                                />
+                                <AvatarFallback>
+                                    {(session.user.name?.[0] || session.user.email?.[0] || "U").toUpperCase()}
+                                </AvatarFallback>
+                            </Avatar>
+                            <div>
+                                <p className="text-sm font-medium">{session.user.name || session.user.email}</p>
+                                {session.user.email && (
+                                    <p className="text-xs text-default-500">{session.user.email}</p>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                    
                     {siteConfig.navMenuItems.map((item, index) => (
                         <NavbarMenuItem key={`${item}-${index}`}>
                             <Link
@@ -158,6 +273,38 @@ export const Navbar = () => {
                             </Link>
                         </NavbarMenuItem>
                     ))}
+                    
+                    {mounted && !isPending && (
+                        <div className="mt-4 pt-4 border-t">
+                            {session ? (
+                                <Button
+                                    onClick={handleLogout}
+                                    className="w-full"
+                                    color="danger"
+                                >
+                                    Log Out
+                                </Button>
+                            ) : (
+                                <div className="flex flex-col gap-2">
+                                    <Button
+                                        as={Link}
+                                        href="/auth/login"
+                                        className="w-full"
+                                        variant="flat"
+                                    >
+                                        Login
+                                    </Button>
+                                    <Button
+                                        as={Link}
+                                        href="/auth/register"
+                                        className="w-full"
+                                    >
+                                        Sign Up
+                                    </Button>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
             </NavbarMenu>
         </HeroUINavbar>
