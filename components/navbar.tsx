@@ -32,6 +32,15 @@ import { link as linkStyles } from "@heroui/theme";
 import { authClient } from "@/lib/auth-client";
 import { addToast } from "@heroui/toast";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { 
+    DropdownMenu, 
+    DropdownMenuContent, 
+    DropdownMenuItem, 
+    DropdownMenuLabel, 
+    DropdownMenuSeparator, 
+    DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
+import { FileTextIcon, PencilIcon, PlusIcon } from "lucide-react";
 
 export const Navbar = () => {
     const router = useRouter();
@@ -143,38 +152,68 @@ export const Navbar = () => {
                     </Link>
                     <ThemeSwitch />
                 </NavbarItem>
-                {/* <NavbarItem className="hidden lg:flex">
-                    {searchInput}
-                </NavbarItem> */}
+                {/* {searchInput} */}
                 
                 {mounted && !isPending && (
                     <>
                         {session ? (
                             <>
                                 <NavbarItem>
-                                    <div className="flex items-center gap-2">
-                                        <Avatar className="h-8 w-8">
-                                            <AvatarImage
-                                                src={session.user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${session.user.name || session.user.email}`} 
-                                                alt={session.user.name || "User"}
-                                            />
-                                            <AvatarFallback>
-                                                {(session.user.name?.[0] || session.user.email?.[0] || "U").toUpperCase()}
-                                            </AvatarFallback>
-                                        </Avatar>
-                                        <span className="text-sm hidden md:block">
-                                            {session.user.name || session.user.email}
-                                        </span>
-                                    </div>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button 
+                                                variant="ghost" 
+                                                className="flex items-center gap-2 p-0 h-auto hover:bg-transparent"
+                                            >
+                                                <Avatar className="h-8 w-8">
+                                                    <AvatarImage
+                                                        src={session.user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${session.user.name || session.user.email}`} 
+                                                        alt={session.user.name || "User"}
+                                                    />
+                                                    <AvatarFallback>
+                                                        {(session.user.name?.[0] || session.user.email?.[0] || "U").toUpperCase()}
+                                                    </AvatarFallback>
+                                                </Avatar>
+                                                <span className="text-sm hidden md:block">
+                                                    {session.user.name || session.user.email}
+                                                </span>
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent align="end">
+                                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem
+                                                onClick={() => router.push('/posts/create')}
+                                                className="cursor-pointer"
+                                            >
+                                                <PlusIcon className="h-4 w-4 mr-2" />
+                                                Create Post
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem
+                                                onClick={() => router.push('/posts/drafts')}
+                                                className="cursor-pointer"
+                                            >
+                                                <PencilIcon className="h-4 w-4 mr-2" />
+                                                My Drafts
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem
+                                                onClick={handleLogout}
+                                                className="cursor-pointer text-destructive focus:text-destructive"
+                                            >
+                                                Log Out
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
                                 </NavbarItem>
+                                
                                 <NavbarItem>
                                     <Button
-                                        onClick={handleLogout}
+                                        onClick={() => router.push('/posts/create')}
                                         className="text-sm font-normal"
-                                        variant="flat"
-                                        color="danger"
+                                        size="sm"
                                     >
-                                        Log Out
+                                        <PlusIcon className="h-4 w-4 mr-2" />
+                                        New Post
                                     </Button>
                                 </NavbarItem>
                             </>
@@ -217,8 +256,8 @@ export const Navbar = () => {
                     >
                         Sponsor
                     </Button>
-                </NavbarItem>
-            </NavbarContent>
+                    </NavbarItem> 
+                </NavbarContent>
 
             <NavbarContent className="basis-1 pl-4 sm:hidden" justify="end">
                 <Link
@@ -273,6 +312,26 @@ export const Navbar = () => {
                             </Link>
                         </NavbarMenuItem>
                     ))}
+                    
+                    {mounted && !isPending && session && (
+                        <div className="mt-2 pt-2 border-t flex flex-col gap-2">
+                            <Button
+                                onClick={() => router.push('/posts/create')}
+                                className="w-full"
+                                startContent={<PlusIcon className="h-4 w-4" />}
+                            >
+                                Create New Post
+                            </Button>
+                            <Button
+                                onClick={() => router.push('/posts/drafts')}
+                                className="w-full"
+                                variant="flat"
+                                startContent={<PencilIcon className="h-4 w-4" />}
+                            >
+                                My Drafts
+                            </Button>
+                        </div>
+                    )}
                     
                     {mounted && !isPending && (
                         <div className="mt-4 pt-4 border-t">

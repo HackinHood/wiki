@@ -1,4 +1,6 @@
 import { CreatePostForm } from "@/components/create-post-form"
+import { EditorProvider } from "@tiptap/react"
+import StarterKit from "@tiptap/starter-kit"
 
 export default function CreatePostPage() {
     return (

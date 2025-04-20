@@ -3,16 +3,13 @@
 import { Button } from "@/components/ui/button"
 import { DiscordIcon } from "@/components/icons"
 import { useRouter } from "next/navigation"
+import { authClient } from "@/lib/auth-client"
 
 export function DiscordAuthButton() {
-    const router = useRouter()
-
     const handleDiscordLogin = async () => {
-        try {
-            router.push("/api/auth/oauth/discord")
-        } catch (error) {
-            console.error("Discord login error:", error)
-        }
+        authClient.signIn.social({
+            provider: "discord",
+        })
     }
 
     return (
