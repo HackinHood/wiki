@@ -15,17 +15,17 @@ import TableHeader from "@tiptap/extension-table-header"
 import TableRow from "@tiptap/extension-table-row"
 import TextAlign from "@tiptap/extension-text-align"
 import Underline from "@tiptap/extension-underline"
-import { useEditor, EditorContent, EditorProvider } from "@tiptap/react"
+import { EditorContent, useEditor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 import { createLowlight } from "lowlight"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
+import { EditorToolbar } from "@/components/editor-toolbar"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { authClient } from "@/lib/auth-client"
-import { EditorToolbar } from "@/components/editor-toolbar"
 
 export function CreatePostForm({ draftId, initialData }: { draftId?: string, initialData?: any }) {
     const router = useRouter()
@@ -153,7 +153,7 @@ export function CreatePostForm({ draftId, initialData }: { draftId?: string, ini
 
         localStorage.setItem("postDraft", JSON.stringify(draft))
         setLastSaved(new Date())
-        
+
         addToast({
             title: "Draft saved",
             description: "Your draft has been saved locally",
@@ -165,11 +165,11 @@ export function CreatePostForm({ draftId, initialData }: { draftId?: string, ini
     // Save draft to server (for logged-in users)
     const saveServerDraft = async () => {
         if (!editor || !session) return
-        
+
         setIsSavingDraft(true)
         try {
             const content = editor.getHTML()
-            
+
             // If we have a draftId, update the existing draft
             if (draftId) {
                 const response = await fetch("/api/posts", {
@@ -186,7 +186,7 @@ export function CreatePostForm({ draftId, initialData }: { draftId?: string, ini
                         status: "draft"
                     }),
                 })
-                
+
                 if (!response.ok) {
                     throw new Error("Failed to update draft")
                 }
@@ -205,20 +205,20 @@ export function CreatePostForm({ draftId, initialData }: { draftId?: string, ini
                         status: "draft"
                     }),
                 })
-                
+
                 if (!response.ok) {
                     throw new Error("Failed to save draft")
                 }
-                
+
                 const result = await response.json()
-                
+
                 // Clear localStorage draft after saving to server
                 localStorage.removeItem("postDraft")
-                
+
                 // Redirect to drafts page
                 router.push("/posts/drafts")
             }
-            
+
             setLastSaved(new Date())
             addToast({
                 title: "Draft saved",
@@ -286,7 +286,7 @@ export function CreatePostForm({ draftId, initialData }: { draftId?: string, ini
                         status: "published"
                     }),
                 })
-                
+
                 if (!response.ok) {
                     throw new Error("Failed to publish post")
                 }
@@ -305,7 +305,7 @@ export function CreatePostForm({ draftId, initialData }: { draftId?: string, ini
                         status: "published"
                     }),
                 })
-                
+
                 if (!response.ok) {
                     throw new Error("Failed to publish post")
                 }
@@ -355,7 +355,7 @@ export function CreatePostForm({ draftId, initialData }: { draftId?: string, ini
                 }
                 setLastSaved(null)
             }
-            
+
             addToast({
                 title: "Draft discarded",
                 description: "Your draft has been discarded",
@@ -445,9 +445,9 @@ export function CreatePostForm({ draftId, initialData }: { draftId?: string, ini
                     <Button type="button" variant="outline" onClick={discardDraft}>
                         Discard
                     </Button>
-                    <Button 
-                        type="button" 
-                        variant="secondary" 
+                    <Button
+                        type="button"
+                        variant="secondary"
                         onClick={session ? saveServerDraft : saveLocalDraft}
                         disabled={isSavingDraft}
                     >

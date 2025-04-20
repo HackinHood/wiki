@@ -2,45 +2,42 @@
 
 import clsx from "clsx";
 import NextLink from "next/link";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import {
-    TwitterIcon,
-    GithubIcon,
     DiscordIcon,
+    GithubIcon,
     HeartFilledIcon,
-    SearchIcon,
     Logo,
+    TwitterIcon
 } from "@/components/icons";
 import { ThemeSwitch } from "@/components/theme-switch";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
 import { siteConfig } from "@/config/site";
+import { authClient } from "@/lib/auth-client";
 import { Button } from "@heroui/button";
-import { Input } from "@heroui/input";
-import { Kbd } from "@heroui/kbd";
 import { Link } from "@heroui/link";
 import {
     Navbar as HeroUINavbar,
-    NavbarContent,
-    NavbarMenu,
-    NavbarMenuToggle,
     NavbarBrand,
+    NavbarContent,
     NavbarItem,
+    NavbarMenu,
     NavbarMenuItem,
+    NavbarMenuToggle,
 } from "@heroui/navbar";
 import { link as linkStyles } from "@heroui/theme";
-import { authClient } from "@/lib/auth-client";
 import { addToast } from "@heroui/toast";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { 
-    DropdownMenu, 
-    DropdownMenuContent, 
-    DropdownMenuItem, 
-    DropdownMenuLabel, 
-    DropdownMenuSeparator, 
-    DropdownMenuTrigger 
-} from "@/components/ui/dropdown-menu";
-import { FileTextIcon, PencilIcon, PlusIcon } from "lucide-react";
+import { PencilIcon, PlusIcon } from "lucide-react";
 
 export const Navbar = () => {
     const router = useRouter();
@@ -153,7 +150,7 @@ export const Navbar = () => {
                     <ThemeSwitch />
                 </NavbarItem>
                 {/* {searchInput} */}
-                
+
                 {mounted && !isPending && (
                     <>
                         {session ? (
@@ -161,13 +158,13 @@ export const Navbar = () => {
                                 <NavbarItem>
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>
-                                            <Button 
-                                                variant="ghost" 
+                                            <Button
+                                                variant="ghost"
                                                 className="flex items-center gap-2 p-0 h-auto hover:bg-transparent"
                                             >
                                                 <Avatar className="h-8 w-8">
                                                     <AvatarImage
-                                                        src={session.user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${session.user.name || session.user.email}`} 
+                                                        src={session.user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${session.user.name || session.user.email}`}
                                                         alt={session.user.name || "User"}
                                                     />
                                                     <AvatarFallback>
@@ -205,7 +202,7 @@ export const Navbar = () => {
                                         </DropdownMenuContent>
                                     </DropdownMenu>
                                 </NavbarItem>
-                                
+
                                 <NavbarItem>
                                     <Button
                                         onClick={() => router.push('/posts/create')}
@@ -242,7 +239,7 @@ export const Navbar = () => {
                         )}
                     </>
                 )}
-                
+
                 <NavbarItem className="hidden md:flex">
                     <Button
                         isExternal
@@ -256,8 +253,8 @@ export const Navbar = () => {
                     >
                         Sponsor
                     </Button>
-                    </NavbarItem> 
-                </NavbarContent>
+                </NavbarItem>
+            </NavbarContent>
 
             <NavbarContent className="basis-1 pl-4 sm:hidden" justify="end">
                 <Link
@@ -278,7 +275,7 @@ export const Navbar = () => {
                         <div className="flex items-center gap-2 py-2 mb-4 border-b">
                             <Avatar className="h-10 w-10">
                                 <AvatarImage
-                                    src={session.user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${session.user.name || session.user.email}`} 
+                                    src={session.user.image || `https://api.dicebear.com/7.x/initials/svg?seed=${session.user.name || session.user.email}`}
                                     alt={session.user.name || "User"}
                                 />
                                 <AvatarFallback>
@@ -293,7 +290,7 @@ export const Navbar = () => {
                             </div>
                         </div>
                     )}
-                    
+
                     {siteConfig.navMenuItems.map((item, index) => (
                         <NavbarMenuItem key={`${item}-${index}`}>
                             <Link
@@ -302,8 +299,8 @@ export const Navbar = () => {
                                         ? "primary"
                                         : index ===
                                             siteConfig.navMenuItems.length - 1
-                                          ? "danger"
-                                          : "foreground"
+                                            ? "danger"
+                                            : "foreground"
                                 }
                                 href="#"
                                 size="lg"
@@ -312,7 +309,7 @@ export const Navbar = () => {
                             </Link>
                         </NavbarMenuItem>
                     ))}
-                    
+
                     {mounted && !isPending && session && (
                         <div className="mt-2 pt-2 border-t flex flex-col gap-2">
                             <Button
@@ -332,7 +329,7 @@ export const Navbar = () => {
                             </Button>
                         </div>
                     )}
-                    
+
                     {mounted && !isPending && (
                         <div className="mt-4 pt-4 border-t">
                             {session ? (

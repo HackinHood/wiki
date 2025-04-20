@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { authClient } from "@/lib/auth-client"
 import { CreatePostForm } from "@/components/create-post-form"
+import { authClient } from "@/lib/auth-client"
 import { addToast } from "@heroui/toast"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 
 export default function EditPostPage() {
     const router = useRouter()
@@ -38,7 +38,7 @@ export default function EditPostPage() {
     useEffect(() => {
         async function fetchPost() {
             if (!session || !postId) return
-            
+
             try {
                 // TODO: Add API endpoint to get a single post by ID
                 // For now, we'll fetch all drafts and find the one we need
@@ -46,14 +46,14 @@ export default function EditPostPage() {
                 if (!response.ok) {
                     throw new Error("Failed to fetch post")
                 }
-                
+
                 const data = await response.json()
                 const foundPost = data.find(p => p._id === postId)
-                
+
                 if (!foundPost) {
                     throw new Error("Post not found")
                 }
-                
+
                 setPost(foundPost)
             } catch (error) {
                 console.error("Error fetching post:", error)
@@ -68,7 +68,7 @@ export default function EditPostPage() {
                 setIsLoading(false)
             }
         }
-        
+
         if (session && postId) {
             fetchPost()
         }

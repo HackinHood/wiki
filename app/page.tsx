@@ -2,32 +2,32 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { authClient } from "@/lib/auth-client";
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
 import { addToast } from "@heroui/toast";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
 
 function PostCard({ post }: { post: any }) {
-    const postDate = post.createdAt 
+    const postDate = post.createdAt
         ? new Date(post.createdAt).toLocaleDateString("en-US", {
             month: "short",
             day: "numeric",
             year: "numeric",
-          })
+        })
         : new Date(Number.parseInt(post._id.toString().substring(0, 8), 16) * 1000).toLocaleDateString("en-US", {
             month: "short",
             day: "numeric",
             year: "numeric",
-          });
+        });
 
     // Get first letter of author ID for avatar fallback
     const authorInitial = post.author ? post.author.charAt(0).toUpperCase() : 'U';
     const router = useRouter();
 
     // Function to strip HTML tags for preview
-    const stripHtml = (html) => {
+    const stripHtml = (html: string) => {
         const doc = new DOMParser().parseFromString(html, 'text/html');
         return doc.body.textContent || '';
     };
@@ -55,8 +55,8 @@ function PostCard({ post }: { post: any }) {
                     </div>
                 )}
                 <p className="text-muted-foreground line-clamp-3">
-                    {typeof post.content === 'string' 
-                        ? stripHtml(post.content).substring(0, 150) + (stripHtml(post.content).length > 150 ? "..." : "") 
+                    {typeof post.content === 'string'
+                        ? stripHtml(post.content).substring(0, 150) + (stripHtml(post.content).length > 150 ? "..." : "")
                         : "No content available"}
                 </p>
             </CardContent>
@@ -71,9 +71,9 @@ function PostCard({ post }: { post: any }) {
                             <p className="text-xs text-muted-foreground">{post.author}</p>
                         </div>
                     </div>
-                    <Button 
-                        variant="ghost" 
-                        size="sm" 
+                    <Button
+                        variant="ghost"
+                        size="sm"
                         className="ml-auto"
                         onPress={() => router.push(`/posts/${post._id}`)}
                     >
@@ -111,7 +111,7 @@ export default function Home() {
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold">Latest Posts</h1>
                 {session && (
-                    <Button 
+                    <Button
                         onPress={() => router.push("/posts/create")}
                         className="flex items-center gap-2"
                     >

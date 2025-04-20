@@ -1,13 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { authClient } from "@/lib/auth-client"
+import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { authClient } from "@/lib/auth-client"
 import { Button } from "@heroui/button"
 import { addToast } from "@heroui/toast"
 import { formatDistanceToNow } from "date-fns"
-import { Badge } from "@/components/ui/badge"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 
 export default function DraftsPage() {
     const router = useRouter()
@@ -26,13 +26,13 @@ export default function DraftsPage() {
     useEffect(() => {
         async function fetchDrafts() {
             if (!session) return
-            
+
             try {
                 const response = await fetch("/api/posts?drafts=true")
                 if (!response.ok) {
                     throw new Error("Failed to fetch drafts")
                 }
-                
+
                 const data = await response.json()
                 setDrafts(data)
             } catch (error) {
@@ -47,7 +47,7 @@ export default function DraftsPage() {
                 setIsLoading(false)
             }
         }
-        
+
         if (session) {
             fetchDrafts()
         }
@@ -85,18 +85,18 @@ export default function DraftsPage() {
                         status: "published"
                     }),
                 })
-                
+
                 if (!response.ok) {
                     throw new Error("Failed to publish draft")
                 }
-                
+
                 addToast({
                     title: "Draft published",
                     description: "Your draft has been published successfully",
                     variant: "flat",
                     color: "success"
                 })
-                
+
                 // Remove the draft from the list
                 setDrafts(drafts.filter(d => d._id !== draft._id))
             } catch (error) {
@@ -118,7 +118,7 @@ export default function DraftsPage() {
                 // TODO: Add delete API endpoint
                 // For now, just remove from the list
                 setDrafts(drafts.filter(d => d._id !== draft._id))
-                
+
                 addToast({
                     title: "Draft deleted",
                     description: "Your draft has been deleted",
@@ -152,13 +152,13 @@ export default function DraftsPage() {
             <div className="max-w-5xl mx-auto">
                 <div className="flex items-center justify-between mb-6">
                     <h1 className="text-3xl font-bold tracking-tight">Your Drafts</h1>
-                    <Button 
+                    <Button
                         onClick={() => router.push('/posts/create')}
                     >
                         Create New Post
                     </Button>
                 </div>
-                
+
                 {isLoading ? (
                     <div className="text-center py-12">
                         <p className="text-muted-foreground">Loading your drafts...</p>
@@ -167,7 +167,7 @@ export default function DraftsPage() {
                     <div className="text-center py-12">
                         <h2 className="text-2xl font-semibold mb-4">No drafts yet</h2>
                         <p className="text-muted-foreground mb-6">Start writing and save your work as drafts</p>
-                        <Button 
+                        <Button
                             onClick={() => router.push('/posts/create')}
                         >
                             Create new post
@@ -195,19 +195,19 @@ export default function DraftsPage() {
                                         {/* Strip HTML tags for preview */}
                                         {draft.content
                                             ? draft.content.replace(/<[^>]*>/g, '').substring(0, 200) +
-                                              (draft.content.length > 200 ? '...' : '')
+                                            (draft.content.length > 200 ? '...' : '')
                                             : 'No content'}
                                     </div>
                                 </CardContent>
                                 <CardFooter className="flex justify-end space-x-2">
-                                    <Button 
-                                        variant="outline" 
+                                    <Button
+                                        variant="outline"
                                         onClick={() => deleteDraft(draft)}
                                         color="danger"
                                     >
                                         Delete
                                     </Button>
-                                    <Button 
+                                    <Button
                                         variant="secondary"
                                         onClick={() => editDraft(draft)}
                                     >

@@ -14,12 +14,12 @@ export const GET = async (req: Request) => {
         if (!session) {
             return new Response("Unauthorized", { status: 401 });
         }
-        
+
         // Only return drafts belonging to the current user
         const drafts = await db.collection("posts")
             .find({ author: session.user.id, status: "draft" })
             .toArray();
-            
+
         return new Response(JSON.stringify(drafts), {
             status: 200,
             headers: { "Content-Type": "application/json" },
@@ -58,19 +58,19 @@ export const POST = async (req: Request) => {
 
     // For published posts, require description and tldr
     if (status === "published" && (!description || !tldr)) {
-        return new Response(JSON.stringify({ 
-            error: "Description and tldr are required for published posts" 
+        return new Response(JSON.stringify({
+            error: "Description and tldr are required for published posts"
         }), {
             status: 400,
             headers: { "Content-Type": "application/json" },
         });
     }
 
-    const post = await db.collection("posts").insertOne({ 
-        title, 
-        content, 
-        description: description || "", 
-        tldr: tldr || "", 
+    const post = await db.collection("posts").insertOne({
+        title,
+        content,
+        description: description || "",
+        tldr: tldr || "",
         author: session.user.id,
         status,
         createdAt: new Date(),
@@ -104,8 +104,8 @@ export const PUT = async (req: Request) => {
 
     // For published posts, require description and tldr
     if (status === "published" && (!description || !tldr)) {
-        return new Response(JSON.stringify({ 
-            error: "Description and tldr are required for published posts" 
+        return new Response(JSON.stringify({
+            error: "Description and tldr are required for published posts"
         }), {
             status: 400,
             headers: { "Content-Type": "application/json" },
@@ -114,7 +114,7 @@ export const PUT = async (req: Request) => {
 
     try {
         // Verify the post belongs to the current user
-        const existingPost = await db.collection("posts").findOne({ 
+        const existingPost = await db.collection("posts").findOne({
             _id: new ObjectId(id),
             author: session.user.id
         });
@@ -128,15 +128,15 @@ export const PUT = async (req: Request) => {
 
         const result = await db.collection("posts").updateOne(
             { _id: new ObjectId(id) },
-            { 
-                $set: { 
-                    title, 
-                    content, 
-                    description: description || "", 
+            {
+                $set: {
+                    title,
+                    content,
+                    description: description || "",
                     tldr: tldr || "",
                     status,
                     updatedAt: new Date()
-                } 
+                }
             }
         );
 
