@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useTheme } from "next-themes";
 import { FC } from "react";
 
-import { SunFilledIcon, MoonFilledIcon } from "@/components/icons";
+import { MoonFilledIcon, SunFilledIcon } from "@/components/icons";
 import { SwitchProps, useSwitch } from "@heroui/switch";
 import { useIsSSR } from "@react-aria/ssr";
 import { VisuallyHidden } from "@react-aria/visually-hidden";
@@ -49,7 +49,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
             })}
         >
             <VisuallyHidden>
-                <input {...getInputProps()} />
+                <input suppressHydrationWarning {...getInputProps()} />
             </VisuallyHidden>
             <div
                 {...getWrapperProps()}

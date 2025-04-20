@@ -1,0 +1,414 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 1
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Creating Your First Juice WRLD Post"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Welcome to the "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "italic"
+            },
+            {
+              "type": "highlight",
+              "attrs": {
+                "color": "var(--tt-highlight-yellow)"
+              }
+            }
+          ],
+          "text": "Juice WRLD Wiki Editor"
+        },
+        {
+          "type": "text",
+          "text": "! This editor helps you create "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "engaging content"
+        },
+        {
+          "type": "text",
+          "text": " about the legendary artist using powerful formatting tools licensed under "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "MIT"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Share your knowledge about Juice WRLD with the community. Use the editor's features to make your post stand out."
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Legends Never Die - Juice WRLD (1998-2019)"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": null,
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Editor Features"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "italic"
+                }
+              ],
+              "text": "Create rich posts about Juice WRLD's life, music, and legacy. Use markdown shortcuts like "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "**"
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "italic"
+                }
+              ],
+              "text": " or keyboard shortcuts "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "code"
+                }
+              ],
+              "text": "⌘+B"
+            },
+            {
+              "type": "text",
+              "text": " to emphasize "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "strike"
+                }
+              ],
+              "text": "some"
+            },
+            {
+              "type": "text",
+              "text": " all important facts about his music. 🎵"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Add album artwork, format lyrics, and highlight "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "highlight",
+              "attrs": {
+                "color": "var(--tt-highlight-blue)"
+              }
+            }
+          ],
+          "text": "key moments in his career"
+        },
+        {
+          "type": "text",
+          "text": " to create comprehensive and engaging Juice WRLD content."
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/images/placeholder-image.png",
+        "alt": "Juice WRLD album cover",
+        "title": "Juice WRLD album cover"
+      }
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "Song details"
+                },
+                {
+                  "type": "text",
+                  "text": " - Add release dates (999"
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "superscript"
+                    }
+                  ],
+                  "text": "EP"
+                },
+                {
+                  "type": "text",
+                  "text": ") and charts (No."
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "subscript"
+                    }
+                  ],
+                  "text": "1"
+                },
+                {
+                  "type": "text",
+                  "text": ") with precision."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "Lyric formatting"
+                },
+                {
+                  "type": "text",
+                  "text": ": organize verses and choruses with "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "->"
+                },
+                {
+                  "type": "text",
+                  "text": " symbols that become "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "→"
+                },
+                {
+                  "type": "text",
+                  "text": " arrows."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "italic"
+            }
+          ],
+          "text": "→ "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://juicewrld999.com",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null
+              }
+            }
+          ],
+          "text": "Explore Juice WRLD's official site"
+        }
+      ]
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "textAlign": "left",
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Customize Your Post"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Choose light or dark mode to match Juice WRLD's aesthetic, and organize your content with lists, quotes, and multimedia elements."
+        }
+      ]
+    },
+    {
+      "type": "taskList",
+      "content": [
+        {
+          "type": "taskItem",
+          "attrs": {
+            "checked": true
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Add biography details"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": "left"
+      }
+    }
+  ]
+}

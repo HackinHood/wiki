@@ -1,0 +1,29 @@
+.simple-editor-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.content-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+}
+
+.simple-editor-content {
+    max-width: 640px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.simple-editor-content .tiptap.ProseMirror {
+    padding: 1.5rem;
+    min-height: 350px;
+}
+
+@media screen and (min-width: 768px) {
+    .simple-editor-content .tiptap.ProseMirror {
+        padding: 3rem;
+    }
+}

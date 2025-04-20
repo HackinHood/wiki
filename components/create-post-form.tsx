@@ -2,29 +2,29 @@
 
 import type React from "react"
 
-import { useState, useRef, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { useEditor, EditorContent } from "@tiptap/react"
-import StarterKit from "@tiptap/starter-kit"
-import Placeholder from "@tiptap/extension-placeholder"
+import { Input, Textarea } from "@heroui/input"
+import { addToast } from "@heroui/toast"
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
+import Highlight from "@tiptap/extension-highlight"
 import Image from "@tiptap/extension-image"
 import Link from "@tiptap/extension-link"
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight"
-import { createLowlight } from "lowlight"
-import Underline from "@tiptap/extension-underline"
-import TextAlign from "@tiptap/extension-text-align"
+import Placeholder from "@tiptap/extension-placeholder"
 import Table from "@tiptap/extension-table"
-import TableRow from "@tiptap/extension-table-row"
 import TableCell from "@tiptap/extension-table-cell"
 import TableHeader from "@tiptap/extension-table-header"
-import Highlight from "@tiptap/extension-highlight"
-import { addToast } from "@heroui/toast"
-import { Input, Textarea } from "@heroui/input"
+import TableRow from "@tiptap/extension-table-row"
+import TextAlign from "@tiptap/extension-text-align"
+import Underline from "@tiptap/extension-underline"
+import { useEditor } from "@tiptap/react"
+import StarterKit from "@tiptap/starter-kit"
+import { createLowlight } from "lowlight"
+import { useRouter } from "next/navigation"
+import { useEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { EditorToolbar } from "@/components/editor-toolbar"
+import { SimpleEditor } from "./tiptap-templates/simple/simple-editor"
 
 export function CreatePostForm() {
     const router = useRouter()
@@ -274,11 +274,8 @@ export function CreatePostForm() {
                         </div>
                     </div>
 
-                    <TabsContent value="edit" className="p-0 m-0">
-                        {editor && <EditorToolbar editor={editor} />}
-                        <div className="p-4 min-h-[500px]">
-                            <EditorContent editor={editor} className="w-full min-h-[500px] focus-visible:outline-none" />
-                        </div>
+                    <TabsContent value="edit" className="h-[500px] overflow-hidden">
+                        <SimpleEditor />
                     </TabsContent>
 
                     <TabsContent value="preview" className="p-0 m-0">

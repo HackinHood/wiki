@@ -2,8 +2,110 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Instead of using @import url(), let's include keyframe animations directly */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.95);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0.95);
+  }
+}
+
+@keyframes slideFromTop {
+  from {
+    transform: translateY(-0.5rem);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    transform: translateX(0.5rem);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromLeft {
+  from {
+    transform: translateX(-0.5rem);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromBottom {
+  from {
+    transform: translateY(0.5rem);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @layer base {
   :root {
-    --radius: 0.5rem
+    --radius: 0.5rem;
+    /* Essential variables from variables.scss */
+    --tt-toolbar-height: 44px;
+    --tt-theme-text: var(--tt-gray-light-900);
+    --tt-bg-color: #ffffff;
+    --tt-scrollbar-color: rgba(37, 39, 45, 0.1);
+  }
+
+  .dark {
+    --tt-theme-text: var(--tt-gray-dark-900);
+    --tt-bg-color: #0e0e11;
+    --tt-scrollbar-color: rgba(238, 238, 246, 0.11);
   }
 }

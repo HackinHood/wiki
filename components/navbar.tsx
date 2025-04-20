@@ -64,26 +64,26 @@ export const Navbar = () => {
         }
     };
 
-    const searchInput = (
-        <Input
-            aria-label="Search"
-            classNames={{
-                input: "text-sm",
-                inputWrapper: "bg-default-100",
-            }}
-            endContent={
-                <Kbd className="hidden lg:inline-block" keys={["command"]}>
-                    K
-                </Kbd>
-            }
-            labelPlacement="outside"
-            placeholder="Search..."
-            startContent={
-                <SearchIcon className="pointer-events-none shrink-0 text-base text-default-400" />
-            }
-            type="search"
-        />
-    );
+    // const searchInput = (
+    //     <Input
+    //         aria-label="Search"
+    //         classNames={{
+    //             input: "text-sm",
+    //             inputWrapper: "bg-default-100",
+    //         }}
+    //         endContent={
+    //             <Kbd className="hidden lg:inline-block" keys={["command"]}>
+    //                 K
+    //             </Kbd>
+    //         }
+    //         labelPlacement="outside"
+    //         placeholder="Search..."
+    //         startContent={
+    //             <SearchIcon className="pointer-events-none shrink-0 text-base text-default-400" />
+    //         }
+    //         type="search"
+    //     />
+    // );
 
     return (
         <HeroUINavbar maxWidth="xl" position="sticky">
@@ -143,9 +143,9 @@ export const Navbar = () => {
                     </Link>
                     <ThemeSwitch />
                 </NavbarItem>
-                <NavbarItem className="hidden lg:flex">
+                {/* <NavbarItem className="hidden lg:flex">
                     {searchInput}
-                </NavbarItem>
+                </NavbarItem> */}
                 
                 {mounted && !isPending && (
                     <>
@@ -233,7 +233,7 @@ export const Navbar = () => {
             </NavbarContent>
 
             <NavbarMenu>
-                {searchInput}
+                {/* {searchInput} */}
                 <div className="mx-4 mt-2 flex flex-col gap-2">
                     {mounted && !isPending && session && (
                         <div className="flex items-center gap-2 py-2 mb-4 border-b">
